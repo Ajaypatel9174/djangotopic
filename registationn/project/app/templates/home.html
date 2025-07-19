@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{msg}}
+    <br>
+    <a href="{% url 'register' %}">Registration</a>
+<a href="">Login</a>
+{% if register %}
+<form action="{% url 'registerdata' %}" method="post">
+    {% csrf_token %}
+    name: <input type="text" name="name">
+    <br>
+    email: <input type="email" name="email">
+    contact: <input type="number" name="contact">
+    image : <input type="file" name="image">
+    resume : <input type="file" name="resume">
+    <input type="submit">
+</form>
+{% endif %}
+</body>
+</html>
