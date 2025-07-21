@@ -11,7 +11,7 @@
     <a href="{% url 'register' %}">Registration</a>
 <a href="">Login</a>
 {% if register %}
-<form action="{% url 'registerdata' %}" method="post">
+<form action="{% url 'registerdata' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     name: <input type="text" name="name">
     <br>
