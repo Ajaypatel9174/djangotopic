@@ -9,9 +9,9 @@
     {{msg}}
     <br>
     <a href="{% url 'register' %}">Registration</a>
-<a href="">Login</a>
+<a href="{% url 'login' %}" >Login</a>
 {% if register %}
-<form action="{% url 'registerdata' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'login' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     name: <input type="text" name="name">
     <br>
@@ -21,7 +21,8 @@
     resume : <input type="file" name="resume">
     password: <input type="password" name="password">
     cpassword: <input type="password" name="cpassword">
-    <input type="submit">
+
+    <input type="submit" value="register">
 </form>
 {% endif %}
 </body>

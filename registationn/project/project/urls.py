@@ -25,4 +25,7 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('register/',views.register,name='register'),
     path('registerdata/',views.registerdata,name='registerdata'),
+    path('login/',views.login,name='login'),
+    path('query/<int:PK/',views.query,name='query')
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

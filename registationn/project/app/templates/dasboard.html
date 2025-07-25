@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple Dashboard</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}" />
+</head>
+<body>
+  <div class="dashboard">
+    <h1>User Dashboard</h1>
+    <div class="card">
+      <div class="profile">
+        <img src="{{image.url}}" alt="User Image" width="25% "  />
+        
+      </div>
+    
+      <div class="details">{{id}}
+     
+        <p><strong>Name:</strong> {{name}}</p>
+        <p><strong>Email:</strong> {{email}}</p>
+        <p><strong>Contact:</strong> {{contact}}</p>
+        <p><strong>Document:</strong><a href="{{document.url}}" download >Download file</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <a href="{% url 'query' PK=id %}">Query</a>
+  {% if query %}
+  <form action="">
+    method ='POST'
+    {% csrf_token %}
+    Name <input type="text" value="{{name}}" readonly>
+    email <input type="email" value="{{email}}" readonly>
+    query <input type="text" >
+    <input type="submit" value="query">
+  </form>
+
+  {% endif %}
+</body>
+</html>
