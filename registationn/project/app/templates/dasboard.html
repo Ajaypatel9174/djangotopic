@@ -9,37 +9,58 @@
   <link rel="stylesheet" href="{% static 'style.css' %}" />
 </head>
 <body>
+  {% block content %}
+  {% if data %}
   <div class="dashboard">
     <h1>User Dashboard</h1>
     <div class="card">
       <div class="profile">
-        <img src="{{image.url}}" alt="User Image" width="25% "  />
+        <img src="{{data.image.url}}" alt="User Image" width="25% "  />
         
       </div>
     
-      <div class="details">{{id}}
+      <div class="details">{{data.id}}
      
-        <p><strong>Name:</strong> {{name}}</p>
-        <p><strong>Email:</strong> {{email}}</p>
-        <p><strong>Contact:</strong> {{contact}}</p>
-        <p><strong>Document:</strong><a href="{{document.url}}" download >Download file</a>
+        <p><strong>Name:</strong> {{data.name}}</p>
+        <p><strong>Email:</strong> {{data.email}}</p>
+        <p><strong>Contact:</strong> {{data.contact}}</p>
+        <p><strong>Document:</strong><a href="{{data.document.url}}" download >Download file</a>
+        <a href="{% url 'query' pk=data.id %}">Query</a>
           
         </p>
       </div>
     </div>
   </div>
+  {% endif %}
+
   
-  <a href="{% url 'query' PK=id %}">Query</a>
   {% if query %}
-  <form action="">
-    method ='POST'
+  <form action="{% url 'querydata' %}" method ='POST'>
+    
     {% csrf_token %}
-    Name <input type="text" value="{{name}}" readonly>
-    email <input type="email" value="{{email}}" readonly>
-    query <input type="text" >
+    Name <input type="text" name="name"   value="{{data.name}}" readonly>
+    email <input type="email" name="email"  value="{{data.email}}" readonly>
+    query <input type="text" name="query" >
     <input type="submit" value="query">
   </form>
 
   {% endif %}
+
+  {% if allquery %}
+
+  <table border="1">
+
+
+    <tr>
+      <th>S.no</th>
+
+    </tr>
+
+
+
+
+  </table>
+  {% endif %}
+  {% endblock %}
 </body>
 </html>

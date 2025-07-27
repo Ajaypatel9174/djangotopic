@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Student
+from .models import Query1
+
 
 # Create your views here.
 
@@ -56,7 +58,7 @@ def login(request):
                           'password':user.stu_password,
                           'image':user.stu_image,
                           'id':user.id}
-                    return render(request,'dasboard.html',data)
+                    return render(request,'dasboard.html',{'data':data})
                 else:
                     msg = "password not matched"
                     return render(request,'login.html',{'email':e})
@@ -66,18 +68,33 @@ def login(request):
         else:
             return render(request,'login.html')
     
-def query(request,PK):
-    user = Student.objects.get(id=PK)
+def query(request,pk):
+    user = Student.objects.get(id=pk)
     data={'name':user.stu_name,
           'email':user.stu_email,
           'contact':user.stu_contact,
           'password':user.stu_password,
           'image':user.stu_image,
-          'id':user.id,
-          'query':'query'}
-    return render(request,'dashboard.html',{'data':data,'query':'query'})
+          'id':user.id,}
+        #   'query':'query'}
+    return render(request,'dasboard.html',{'data':data,'query':'query'})
    
-                          
+def querydata(request):
+    if request.method=='POST':
+        e = request.POST.get('email')                       
+        n = request.POST.get('name')                       
+        q = request.POST.get('query')
+        Query1.objects.create(stu_name=n,stu_email=e,stu_query=q)   
+        user = Student.objects.get(stu_email=e)
+        data={'name':user.stu_name,
+            'email':user.stu_email,
+            'contact':user.stu_contact,
+            'password':user.stu_password,
+            'image':user.stu_image,
+            'id':user.id,}
+        return render(request,'dasboard.html',{'data':data})
+    
+
 
         # Student.objects.create(stu_name=n,stu_email=e,stu_contact=c,stu_image=i,stu_resume=r)
         # msg='registration done'
