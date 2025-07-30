@@ -94,6 +94,42 @@ def querydata(request):
             'id':user.id,}
         return render(request,'dasboard.html',{'data':data})
     
+def  showquery(request,pk):
+    user = Student.objects.get(id=pk)
+    e = user.stu_email
+    print(e)
+    
+    all_query = Query1.objects.filter(stu_email=e)
+
+    data = {'name':user.stu_name,
+            'email':user.stu_email,
+            'contact':user.stu_contact,
+            'password':user.stu_password,
+            'image':user.stu_image,
+            'id':user.id}
+    return render(request,'dasboard.html',{'data':data,'all_query':all_query})
+    
+    
+    
+def edit(request,pk,pke):
+    user = Student.objects.get(id=pk)
+    data={'name':user.stu_name,
+            'email':user.stu_email,
+            'contact':user.stu_contact,
+            'password':user.stu_password,
+            'image':user.stu_image,
+            'id':user.id}
+    olddata=Query1.objects.get(id=pke)
+
+    return render(request,'dasboard.html',{'data':data,'olddata':olddata})
+
+    
+
+    
+
+
+ 
+    
 
 
         # Student.objects.create(stu_name=n,stu_email=e,stu_contact=c,stu_image=i,stu_resume=r)

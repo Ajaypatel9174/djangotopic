@@ -27,6 +27,8 @@ urlpatterns = [
     path('registerdata/',views.registerdata,name='registerdata'),
     path('login/',views.login,name='login'),
     path('query/<int:pk>/',views.query,name='query'),
-    path('querydata/',views.querydata,name='querydata')
+    path('querydata/',views.querydata,name='querydata'),
+    path('showquery/<int:pk>/',views.showquery,name='showquery'),
+    path('edit/<int:pk>/<int:pke>/',views.edit,name='edit')
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
