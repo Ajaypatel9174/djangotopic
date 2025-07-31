@@ -29,6 +29,8 @@ urlpatterns = [
     path('query/<int:pk>/',views.query,name='query'),
     path('querydata/',views.querydata,name='querydata'),
     path('showquery/<int:pk>/',views.showquery,name='showquery'),
-    path('edit/<int:pk>/<int:pke>/',views.edit,name='edit')
+    path('edit/<int:pk>/<int:pke>/',views.edit,name='edit'),
+    path('update/<int:pk>/<int:pke>/',views.update,name='update'),
+    path('delete/<int:pk>/<int:pke>/',views.delete,name='delete')
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

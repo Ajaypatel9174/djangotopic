@@ -124,7 +124,45 @@ def edit(request,pk,pke):
     return render(request,'dasboard.html',{'data':data,'olddata':olddata})
 
     
+def update(request,pk,pke):
 
+    user = Student.objects.get(id=pk)
+    data = {'name':user.stu_name,
+            'email':user.stu_email,
+            'contact':user.stu_contact,
+            'password':user.stu_password,
+            'image':user.stu_image,
+            'id':user.id}
+
+
+    olddata=Query1.objects.get(id=pke)
+    if request.method=="POST":
+ 
+        n = request.POST.get('name')         
+        e = request.POST.get('email')                       
+        q = request.POST.get('query')
+
+    # olddata.stu_query = request.POST.get('stu_query')
+    olddata.stu_query=q
+    olddata.save()
+
+    all_query = Query1.objects.filter(stu_email=e)
+
+    return render(request,'dasboard.html',{'data':data,'all_query':all_query})
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+
+    
     
 
 
