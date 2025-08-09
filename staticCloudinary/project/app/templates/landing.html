@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://res.cloudinary.com/dqzyxep9s/raw/upload/v1754302054/style_ts7qvx.css">
+</head>
+<body>
+    <h1> this is landing page</h1>
+    <img src="https://res.cloudinary.com/dqzyxep9s/image/upload/v1754299071/samples/people/boy-snow-hoodie.jpg" width="500px" alt="">
+
+    <video width="500px" src="https://res.cloudinary.com/dqzyxep9s/video/upload/v1754299073/samples/sea-turtle.mp4"></video>
+    <video  width="500px" src="https://res.cloudinary.com/dqzyxep9s/video/upload/v1754299073/samples/cld-sample-video.mp4"></video>
+
+    <form action="{% url 'landing' %}" method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+            {{frm}}
+
+        <button type="submit">Register</button>
+
+
+
+    </form>
+
+
+
+
+</body>
+</html>

@@ -26,11 +26,16 @@ urlpatterns = [
     path('register/',views.register,name='register'),
     path('registerdata/',views.registerdata,name='registerdata'),
     path('login/',views.login,name='login'),
-    path('query/<int:pk>/',views.query,name='query'),
+    path('dashboard/',views.dashboard,name='dashboard'),
+    path('dashboard/query/<int:pk>/',views.query,name='query'),
     path('querydata/',views.querydata,name='querydata'),
     path('showquery/<int:pk>/',views.showquery,name='showquery'),
     path('edit/<int:pk>/<int:pke>/',views.edit,name='edit'),
     path('update/<int:pk>/<int:pke>/',views.update,name='update'),
-    path('delete/<int:pk>/<int:pke>/',views.delete,name='delete')
+    path('delete/<int:pk>/<int:pke>/',views.delete,name='delete'),
+    path('logout/',views.logout,name='logout'),
+    path('login/dasboard/search',views.Search,name='Search')
+    
+
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

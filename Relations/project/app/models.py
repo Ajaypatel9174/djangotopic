@@ -34,3 +34,5 @@ class fuel(models.Model):
 class vehical(models.Model):
     v_name =models.CharField(max_length=50,unique=True)
     fuel_name=models.ManyToManyField(fuel,related_name='vehical')
+
+

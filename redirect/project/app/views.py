@@ -14,7 +14,7 @@ from django.urls import reverse
 
 
 def home(request):
-    url=reverse('redirect2',kwargs={'name':'Python','age':25})+-----------------
+    url=reverse('redirect2',kwargs={'name':'Python','age':25})
     return redirect(url)
 
 def redirect2(request,name,age):
