@@ -16,6 +16,11 @@
     <form action="{% url 'landing' %}" method="post"  enctype="multipart/form-data">
         {% csrf_token %}
             {{frm}}
+       Name =  <input type="text" name="name"><br><br>
+        image <input type="text" name="image"><br><br>
+        document <input type="text" name="Document"><br><br>
+        vidio <input type="text" name="vidio"><br><br>
+        audio <input type="text" name="audio"><br><br>
 
         <button type="submit">Register</button>
 

@@ -16,3 +16,13 @@ def landing(request):
 
     form = stuform()
     return render(request,'landing.html',{'frm':form})
+
+
+def MediaData(request):
+    if request.method == 'POST':
+        n = request.POST.get('name')
+        i = request.POST.get('image')
+        d = request.POST.get('document')
+        v = request.POST.get('vidio')
+        a = request.POST.get('audio')
+    

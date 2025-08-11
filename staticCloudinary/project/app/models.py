@@ -8,3 +8,5 @@ class Student(models.Model):
     Image = models.ImageField(upload_to='image/', storage=MediaCloudinaryStorage)
     vidio = models.FileField( upload_to='file/' , storage=VideoMediaCloudinaryStorage)
     audio = models.FileField( upload_to='file/' ,   storage=VideoMediaCloudinaryStorage)
+
+    
