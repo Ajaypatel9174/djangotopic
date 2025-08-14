@@ -21,8 +21,8 @@ def landing(request):
 def MediaData(request):
     if request.method == 'POST':
         n = request.POST.get('name')
-        i = request.POST.get('image')
+        i = request.P.get('image')
         d = request.POST.get('document')
         v = request.POST.get('vidio')
         a = request.POST.get('audio')
-    
+        print(n,i,d,v,a)
