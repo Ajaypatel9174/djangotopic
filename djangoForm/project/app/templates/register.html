@@ -3,7 +3,14 @@
 <form action="{% url 'register' %}" method="post" enctype="multipart/form-data" novalidate>
 
     {% csrf_token %}
-      {{fm.as_p}}
+      {% comment %} {{fm.as_p}}  {% endcomment %}
+       {{fm.name.label}}
+       {{fm.name}}
+       {{fm.email.label}}
+       {{fm.email}}
+       {{fm.name.errors}}
+
+
       <input type="submit" >
 
 

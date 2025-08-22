@@ -50,7 +50,9 @@ class Registrationform(forms.ModelForm):
 
         if resume:
             if resume.size > 5 * 1024 * 1024:
-                self.add_error()
+                self.add_error('resume',"resume shuld we less then 5mb")
+        else:
+            self.add_error('resume',"plese upload your resume")        
 
 
             
@@ -64,4 +66,6 @@ class Registrationform(forms.ModelForm):
 #     class Meta:
 #         model = Student
 #         field = ['email','cintact']
-        
+
+
+

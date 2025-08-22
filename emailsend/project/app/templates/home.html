@@ -1,0 +1,11 @@
+<form action="{% url 'sendmail' %}" method="post">
+    {% csrf_token %}
+
+   subjects: <input type="text" name="subject">
+   msg: <input type="text" name="message">
+   email: <input type="email" name="email">
+
+    <button type="submit">sendmail</button>
+    
+</form>
+
