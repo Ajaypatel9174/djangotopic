@@ -1,0 +1,20 @@
+{{msg}}
+
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+
+
+
+    <label for="">email</label>
+    <input type="email" name="email" required>  <br><br>
+
+    
+    <label for="">password</label>
+    <input type="password" name="password" required>  <br><br>
+
+    <input type="submit">
+
+    
+
+
+</form>
