@@ -20,6 +20,6 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.landing,name='landing'),
-    path('addtocart/<int:pk>',views.addtocart,name='addtocart'),
+    path('list/',views.list,name='list'),
+    path('detail/<int:pk>/',views.detail,name='detail'),
 ]
