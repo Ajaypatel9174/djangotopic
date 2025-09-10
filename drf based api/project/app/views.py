@@ -7,6 +7,7 @@ from.serializers import StudentSerializer
 from.models import Student
 import io
 from django.views.decorators.csrf import csrf_exempt
+from django.forms.models import model_to_dict
 
 # Create your views here.
 
@@ -25,6 +26,7 @@ def stu_list(req):
         if seralizer.is_valid():
             print(seralizer.validated_data)
             seralizer.save()
+            return JsonResponse({'msg':'data saved'})
         else:
             JsonResponse(seralizer.errors)
        
@@ -36,7 +38,43 @@ def stu_list(req):
     return JsonResponse(seralizer.data,safe=False)
     
 
-
+@csrf_exempt
 def stu_detail(req,pk):
+    if req.method=='PUT':
+        data = req.body
+        stream = io.BytesIO(data)
+        p_data = JSONParser().parse(stream)
+        old_data = Student.objects.get(id=pk)
+        serializer = StudentSerializer(old_data,data=p_data)
 
-    pass
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'msg':'data uplod'})
+        else:
+            return JsonResponse(serializer.errors)
+        
+    
+    elif req.method=='PATCH':
+        data = req.body
+        stream = io.BytesIO(data)
+        p_data = JSONParser().parse(stream)
+        old_data = Student.objects.get(id=pk)
+        serializer = StudentSerializer(old_data,data=p_data,partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'msg':'data uplod'})
+        else:
+            return JsonResponse(serializer.errors)
+
+
+        # old_p_data= model_to_dict(old_data)
+        # print(old_p_data)
+        # old_p_data['name']=p_data['name']
+        # old_p_data['email']=p_data['email']
+        # old_p_data['contact']=p_data['contact']
+        # print(old_p_data)
+        
+
+
+    

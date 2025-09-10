@@ -31,3 +31,4 @@ class StudentSerializer(serializers.Serializer):
         instance.contact = validated_data.get('contact', instance.contact)
      
         instance.save()
+        return instance
