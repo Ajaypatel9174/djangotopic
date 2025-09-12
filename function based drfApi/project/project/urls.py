@@ -20,7 +20,5 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('stu_list/', views.stu_list,name='stu_list'),
-    path('stu_detail/<int:pk>/', views.stu_detail,name='stu_detail'),
-    path('Student/',views.Student,name='Student')
+    path('stu_list/',views.stu_list.name=)
 ]

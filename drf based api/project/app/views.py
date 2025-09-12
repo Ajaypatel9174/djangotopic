@@ -14,7 +14,7 @@ from django.forms.models import model_to_dict
 @csrf_exempt
 def stu_list(req):
     if req.method=='POST':
-        content = req.body
+        content = req.body 
         print(content)
        
 
@@ -74,7 +74,91 @@ def stu_detail(req,pk):
         # old_p_data['email']=p_data['email']
         # old_p_data['contact']=p_data['contact']
         # print(old_p_data)
+@csrf_exempt     
+def Student(req):
+    data = req.body
+    p_data = JSONParser().parse(data)
+    pk = p_data['id']
+
         
+    
+
+    if 'id' in p_data:
+        pk = p_data['id']
+
+        if req.method=='GET':
+            data = Student.objects.get(id=pk)
+            serializer = StudentSerializer(data)
+            return JsonResponse(serializer.data)
+    
+        if req.method=='PUT':
+            data = req.body   
+            stream = io.BytesIO(data)
+            p_data = JSONParser().parse(stream)
+            old_data = Student.objects.get(id=pk)
+            # old_p_data = model_to_dict(old_data)
+            # print(old_p_data)
+            # old_p_data['name'] = p_data['name']
+            # old_p_data['email'] = p_data['email']
+            # old_p_data['contact'] = p_data['contact']
+            # print(old_p_data)
+            serializer = StudentSerializer(old_data,data=p_data)#,partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse({'msg':'data Updated'})
+            else:
+                return JsonResponse(serializer.errors)
+        
+        elif req.method=='PATCH':
+            data = req.body   
+            stream = io.BytesIO(data)
+            p_data = JSONParser().parse(stream)
+            old_data = Student.objects.get(id=pk)
+            # old_p_data = model_to_dict(old_data)
+            # print(old_p_data)
+            # old_p_data['name'] = p_data['name']
+            # old_p_data['email'] = p_data['email']
+            # old_p_data['contact'] = p_data['contact']
+            # print(old_p_data)
+            serializer = StudentSerializer(old_data,data=p_data,partial=True)#,partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse({'msg':'data Updated'})
+            else:
+                return JsonResponse(serializer.errors)
+        
+
+        elif req.method=='DELETE':
+            data = Student.objects.get(id=pk)
+            data.delete()
+            return JsonResponse({'msg':'data Deleted'})
+    
+    else:
+        if req.method=='GET':
+            all_data = Student.objects.all()
+            serializer = StudentSerializer(all_data,many=True)
+            print(serializer.data)
+            content = JSONRenderer().render(serializer.data)
+            print(content)
+            return JsonResponse(serializer.data,safe=False)
+        
+        if req.method=='POST':
+            content = req.body
+            print(content)
+            stream = io.BytesIO(content)
+            print(stream)
+            pdata = JSONParser().parse(stream)
+            print(pdata)
+            serializer = StudentSerializer(data=pdata)
+            if serializer.is_valid():
+                print(serializer.validated_data)
+                serializer.save()
+                return JsonResponse({"msg":"Data Saved"})
+            else:
+             return JsonResponse(serializer.errors)
+
+
+
 
 
     
