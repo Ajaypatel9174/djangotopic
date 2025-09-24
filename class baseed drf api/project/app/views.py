@@ -5,6 +5,28 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import  viewsets
+
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import AllowAny
+
+
+
+
+
+class Studentviewset(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing accounts.
+    """
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [AllowAny]
+
+
+
+
+
 
 
 
@@ -27,24 +49,24 @@ class list(APIView):
     
 
 
-class SnippetDetail(APIView):
+class Detail(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
     def get_object(self, pk):
         try:
             return Student.objects.get(pk=pk)
-        except Snippet.DoesNotExist:
+        except Student.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):
         snippet = self.get_object(pk)
-        serializer = SnippetSerializer(snippet)
+        serializer = StudentSerializer(snippet)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
         snippet = self.get_object(pk)
-        serializer = SnippetSerializer(snippet, data=request.data)
+        serializer = StudentSerializer(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -54,3 +76,4 @@ class SnippetDetail(APIView):
         snippet = self.get_object(pk)
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
